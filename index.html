@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="MiInfo – Fideliza clientes con juegos interactivos en WhatsApp. Gamificación, puntos, premios y recompra automática para tu negocio.">
+<meta name="keywords" content="fidelización clientes, WhatsApp marketing, gamificación, programa de lealtad, quiz WhatsApp">
+<meta property="og:title" content="MiInfo – Fideliza clientes con juegos en WhatsApp">
+<meta property="og:description" content="Juega y aprende: la nueva forma de fidelizar clientes por WhatsApp. Sin apps extra. Sin fricción. Puro engagement.">
+<meta property="og:type" content="website">
+<title>MiInfo – Fideliza clientes con juegos en WhatsApp</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --green:#25D366;--green-dark:#128C7E;--green-light:#e8faf2;
+    --blue:#1a73e8;--blue-light:#e8f0fe;
+    --black:#0d0d0d;--white:#ffffff;
+    --gray:#f7f7f5;--gray2:#e8e8e4;--gray-text:#6b6b6b;
+    --radius:12px;--radius-lg:20px;
+    --shadow:0 2px 16px rgba(0,0,0,0.08);
+  }
+  html{scroll-behavior:smooth;font-size:16px}
+  body{font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--black);background:var(--white);line-height:1.6;overflow-x:hidden}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--gray2);padding:0 1.5rem;height:60px;display:flex;align-items:center;justify-content:space-between}
+  .logo{font-size:1.3rem;font-weight:700;letter-spacing:-0.5px;color:var(--black)}
+  .logo span{color:var(--green)}
+  nav a.nav-cta{background:var(--green);color:#fff;border:none;padding:.45rem 1.2rem;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;text-decoration:none;transition:background .2s}
+  nav a.nav-cta:hover{background:var(--green-dark)}
+
+  /* HERO */
+  #hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:5rem 1.5rem 3rem}
+  canvas#net{position:absolute;inset:0;z-index:0;opacity:.55}
+  .hero-inner{position:relative;z-index:1;max-width:720px;text-align:center}
+  .hero-badge{display:inline-block;background:var(--green-light);color:var(--green-dark);font-size:.78rem;font-weight:600;padding:.35rem 1rem;border-radius:99px;margin-bottom:1.5rem;letter-spacing:.3px}
+  h1{font-size:clamp(2rem,5vw,3.4rem);font-weight:800;line-height:1.12;letter-spacing:-1.5px;margin-bottom:1.2rem;color:var(--black)}
+  h1 .accent{color:var(--green)}
+  .hero-sub{font-size:clamp(1rem,2.5vw,1.2rem);color:var(--gray-text);max-width:540px;margin:0 auto 2.5rem;line-height:1.65}
+  .cta-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+  .btn-primary{background:var(--green);color:#fff;border:none;padding:.85rem 2rem;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;text-decoration:none;transition:transform .15s,background .2s,box-shadow .2s;display:inline-flex;align-items:center;gap:.5rem}
+  .btn-primary:hover{background:var(--green-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,0.3)}
+  .btn-secondary{background:transparent;color:var(--black);border:1.5px solid var(--gray2);padding:.85rem 2rem;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;text-decoration:none;transition:border-color .2s,transform .15s;display:inline-flex;align-items:center;gap:.5rem}
+  .btn-secondary:hover{border-color:var(--green);color:var(--green);transform:translateY(-2px)}
+
+  /* SECTIONS */
+  section{padding:5rem 1.5rem}
+  .container{max-width:1000px;margin:0 auto}
+  .section-label{font-size:.78rem;font-weight:700;color:var(--green);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.75rem}
+  h2{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;letter-spacing:-1px;line-height:1.2;margin-bottom:1rem}
+  .section-sub{color:var(--gray-text);font-size:1.05rem;max-width:560px;line-height:1.7}
+
+  /* SEGMENTO */
+  #segmento{background:var(--gray)}
+  .seg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:2.5rem}
+  .seg-card{background:var(--white);border-radius:var(--radius);padding:1.5rem;border:1px solid var(--gray2);transition:box-shadow .2s,transform .2s}
+  .seg-card:hover{box-shadow:var(--shadow);transform:translateY(-3px)}
+  .seg-icon{font-size:1.4rem;margin-bottom:.75rem}
+  .seg-card h3{font-size:1rem;font-weight:700;margin-bottom:.4rem}
+  .seg-card p{font-size:.88rem;color:var(--gray-text);line-height:1.55}
+
+  /* VALOR */
+  .val-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1.25rem;margin-top:2.5rem}
+  .val-card{background:var(--white);border:1px solid var(--gray2);border-radius:var(--radius-lg);padding:1.75rem;transition:box-shadow .2s,transform .2s}
+  .val-card:hover{box-shadow:var(--shadow);transform:translateY(-3px)}
+  .val-icon{width:44px;height:44px;border-radius:10px;background:var(--green-light);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;font-size:1.3rem}
+  .val-card h3{font-size:1rem;font-weight:700;margin-bottom:.5rem}
+  .val-card p{font-size:.88rem;color:var(--gray-text);line-height:1.6}
+
+  /* COMO FUNCIONA */
+  #como{background:var(--black);color:var(--white)}
+  #como h2{color:var(--white)}
+  #como .section-label{color:var(--green)}
+  #como .section-sub{color:rgba(255,255,255,0.55)}
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;margin-top:3rem;position:relative}
+  .step{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-lg);padding:1.75rem;position:relative;overflow:hidden;transition:background .2s}
+  .step:hover{background:rgba(255,255,255,0.08)}
+  .step-num{font-size:3.5rem;font-weight:900;color:rgba(255,255,255,0.05);position:absolute;top:-8px;right:16px;line-height:1;letter-spacing:-3px}
+  .step-icon{width:40px;height:40px;background:var(--green);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:1rem}
+  .step h3{font-size:.95rem;font-weight:700;margin-bottom:.5rem;color:var(--white)}
+  .step p{font-size:.85rem;color:rgba(255,255,255,0.5);line-height:1.6}
+
+  /* DATOS */
+  #datos{background:var(--green-light)}
+  .datos-inner{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+  @media(max-width:640px){.datos-inner{grid-template-columns:1fr}}
+  .datos-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+  .stat{background:var(--white);border-radius:var(--radius);padding:1.25rem;text-align:center}
+  .stat-num{font-size:2rem;font-weight:800;color:var(--green-dark);letter-spacing:-1px}
+  .stat-label{font-size:.8rem;color:var(--gray-text);margin-top:.25rem}
+
+  /* FEATURES */
+  #features{background:var(--gray)}
+  .feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-top:2.5rem}
+  .feat-item{background:var(--white);border:1px solid var(--gray2);border-radius:var(--radius);padding:1.25rem;text-align:center;transition:box-shadow .2s,transform .2s}
+  .feat-item:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+  .feat-item .fi{font-size:1.5rem;margin-bottom:.6rem}
+  .feat-item p{font-size:.85rem;font-weight:600;color:var(--black);line-height:1.4}
+
+  /* DIFERENCIAL */
+  #diferencial{background:var(--white)}
+  .dif-inner{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+  @media(max-width:640px){.dif-inner{grid-template-columns:1fr}}
+  .wa-mockup{background:var(--black);border-radius:var(--radius-lg);padding:1.5rem;max-width:300px}
+  .wa-bar{display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem;padding-bottom:1rem;border-bottom:1px solid rgba(255,255,255,0.1)}
+  .wa-avatar{width:36px;height:36px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;color:#fff}
+  .wa-name{font-size:.9rem;font-weight:700;color:#fff}
+  .wa-status{font-size:.72rem;color:rgba(255,255,255,0.45)}
+  .wa-msg{background:rgba(255,255,255,0.08);border-radius:10px;padding:.75rem 1rem;margin-bottom:.6rem;font-size:.82rem;color:rgba(255,255,255,0.75);line-height:1.5}
+  .wa-msg.green{background:rgba(37,211,102,0.15);color:rgba(255,255,255,0.9)}
+  .wa-quiz{background:rgba(37,211,102,0.12);border:1px solid rgba(37,211,102,0.3);border-radius:10px;padding:.75rem 1rem;margin-top:.75rem}
+  .wa-quiz p{font-size:.8rem;color:rgba(255,255,255,0.8);margin-bottom:.5rem;font-weight:600}
+  .wa-opt{background:rgba(255,255,255,0.06);border-radius:6px;padding:.4rem .7rem;font-size:.75rem;color:rgba(255,255,255,0.6);margin-bottom:.35rem;cursor:pointer;transition:background .15s}
+  .wa-opt:hover{background:rgba(37,211,102,0.2);color:#fff}
+
+  /* FAQ */
+  #faq{background:var(--gray)}
+  .faq-list{margin-top:2rem;max-width:680px}
+  .faq-item{border-bottom:1px solid var(--gray2);padding:1.25rem 0}
+  .faq-q{font-weight:700;font-size:.95rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+  .faq-q::after{content:'+';font-size:1.4rem;color:var(--green);transition:transform .25s;flex-shrink:0}
+  .faq-item.open .faq-q::after{transform:rotate(45deg)}
+  .faq-a{font-size:.88rem;color:var(--gray-text);line-height:1.7;max-height:0;overflow:hidden;transition:max-height .35s ease,margin-top .25s}
+  .faq-item.open .faq-a{max-height:200px;margin-top:.75rem}
+
+  /* CTA FINAL */
+  #cta-final{background:linear-gradient(135deg,#0d0d0d 0%,#1a2a1a 100%);padding:6rem 1.5rem;text-align:center}
+  #cta-final h2{color:#fff;font-size:clamp(1.8rem,4.5vw,2.8rem);margin-bottom:1.5rem}
+  #cta-final .cta-row{justify-content:center}
+
+  /* FOOTER */
+  footer{background:var(--black);color:rgba(255,255,255,0.4);text-align:center;padding:1.5rem;font-size:.82rem}
+  footer span{color:var(--green)}
+
+  /* FLOATING WA */
+  .wa-float{position:fixed;bottom:1.5rem;right:1.5rem;z-index:200;width:56px;height:56px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.5);cursor:pointer;transition:transform .2s,box-shadow .2s;text-decoration:none}
+  .wa-float:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(37,211,102,0.65)}
+  .wa-float svg{width:28px;height:28px;fill:#fff}
+
+  /* ANIMATIONS */
+  .fade-in{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
+  .fade-in.visible{opacity:1;transform:none}
+
+  /* MOBILE */
+  @media(max-width:480px){
+    .cta-row{flex-direction:column;align-items:stretch}
+    .btn-primary,.btn-secondary{justify-content:center}
+    .wa-mockup{max-width:100%}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Mi<span>Info</span></div>
+  <a class="nav-cta" href="https://wa.me/573000000000?text=Hola%2C+quiero+una+demo+de+MiInfo" target="_blank">Hablar por WhatsApp</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="net"></canvas>
+  <div class="hero-inner fade-in">
+    <div class="hero-badge">🎮 Gamificación + WhatsApp = Fidelización real</div>
+    <h1>Usuarios jugando,<br>aprendiendo y <span class="accent">ganando.</span></h1>
+    <p class="hero-sub">Juega y aprende: la nueva forma de fidelizar clientes por WhatsApp. Sin apps extra. Sin fricción. Puro engagement.</p>
+    <div class="cta-row">
+      <a class="btn-primary" href="https://wa.me/573000000000?text=Quiero+solicitar+una+demo+de+MiInfo" target="_blank">👉 Solicitar demo</a>
+      <a class="btn-secondary" href="https://wa.me/573000000000?text=Hola%2C+quiero+info+sobre+MiInfo" target="_blank">💬 Hablar por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- SEGMENTO -->
+<section id="segmento">
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-label">Para quién es</div>
+      <h2>Para empresarios y profesionales</h2>
+      <p class="section-sub">Los planes de fidelización aplican para todo tipo de negocios lícitos. Adaptamos la estrategia a tu industria.</p>
+    </div>
+    <div class="seg-grid">
+      <div class="seg-card fade-in"><div class="seg-icon">🏪</div><h3>Retail y comercio</h3><p>Incentiva la recompra y aumenta la frecuencia de visita de tus clientes.</p></div>
+      <div class="seg-card fade-in"><div class="seg-icon">🍽️</div><h3>Restaurantes</h3><p>Convierte cada visita en una experiencia de juego que genera lealtad real.</p></div>
+      <div class="seg-card fade-in"><div class="seg-icon">🏥</div><h3>Salud y bienestar</h3><p>Educa a tus pacientes y clientes mientras refuerzas tu marca.</p></div>
+      <div class="seg-card fade-in"><div class="seg-icon">🎓</div><h3>Educación</h3><p>Gamifica el aprendizaje y mantén el engagement de tus estudiantes.</p></div>
+      <div class="seg-card fade-in"><div class="seg-icon">🏦</div><h3>Servicios financieros</h3><p>Educa sobre productos y fideliza con dinámicas interactivas.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROPUESTA DE VALOR -->
+<section id="valor">
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-label">Propuesta de valor</div>
+      <h2>Todo lo que tu negocio necesita para fidelizar</h2>
+    </div>
+    <div class="val-grid">
+      <div class="val-card fade-in"><div class="val-icon">🔁</div><h3>Fidelización real de clientes</h3><p>Aumenta la recordación de tu marca y dispara la recompra con experiencias memorables.</p></div>
+      <div class="val-card fade-in"><div class="val-icon">🎮</div><h3>Juegos personalizados</h3><p>Creamos experiencias interactivas tipo quiz, adaptadas 100% a tu negocio e industria.</p></div>
+      <div class="val-card fade-in"><div class="val-icon">🔄</div><h3>Estrategias de recompra</h3><p>Diseñadas específicamente para que el cliente vuelva a elegirte una y otra vez.</p></div>
+      <div class="val-card fade-in"><div class="val-icon">⚡</div><h3>Campañas inteligentes</h3><p>Automatización basada en el comportamiento real del usuario para máxima efectividad.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CÓMO FUNCIONA -->
+<section id="como">
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-label">Proceso</div>
+      <h2>Cómo funciona MiInfo</h2>
+      <p class="section-sub">Cuatro pasos para transformar la relación con tus clientes en una ventaja competitiva.</p>
+    </div>
+    <div class="steps">
+      <div class="step fade-in">
+        <div class="step-num">01</div>
+        <div class="step-icon">🔍</div>
+        <h3>Análisis de necesidades</h3>
+        <p>Entendemos cómo fidelizar mejor a tus clientes y diseñamos la estrategia ideal.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-num">02</div>
+        <div class="step-icon">🎯</div>
+        <h3>Diseño del juego</h3>
+        <p>Creamos dinámicas tipo quiz dentro de WhatsApp, personalizadas para tu marca.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-num">03</div>
+        <div class="step-icon">⭐</div>
+        <h3>Sistema de puntos</h3>
+        <p>Los usuarios acumulan puntos por respuestas correctas e interacción continua.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-num">04</div>
+        <div class="step-icon">🏆</div>
+        <h3>Ranking y premios</h3>
+        <p>Clasificación general y múltiples ganadores con incentivos reales y configurables.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DATOS -->
+<section id="datos">
+  <div class="container">
+    <div class="datos-inner">
+      <div class="fade-in">
+        <div class="section-label">Base de datos</div>
+        <h2>El poder está en los datos</h2>
+        <p class="section-sub">Recolectamos, organizamos y segmentamos tu base de clientes para activar campañas más efectivas y personalizadas.</p>
+        <div style="margin-top:2rem">
+          <a class="btn-primary" href="https://wa.me/573000000000?text=Quiero+saber+más+sobre+segmentación+en+MiInfo" target="_blank">👉 Solicitar demo</a>
+        </div>
+      </div>
+      <div class="datos-stats fade-in">
+        <div class="stat"><div class="stat-num">+3x</div><div class="stat-label">Tasa de recompra</div></div>
+        <div class="stat"><div class="stat-num">85%</div><div class="stat-label">Retención de usuarios</div></div>
+        <div class="stat"><div class="stat-num">+60%</div><div class="stat-label">Recordación de marca</div></div>
+        <div class="stat"><div class="stat-num">100%</div><div class="stat-label">En WhatsApp</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-label">Características</div>
+      <h2>Todo lo que incluye la plataforma</h2>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-item fade-in"><div class="fi">✨</div><p>Interfaz simple e intuitiva</p></div>
+      <div class="feat-item fade-in"><div class="fi">⚡</div><p>Respuestas rápidas y sin lag</p></div>
+      <div class="feat-item fade-in"><div class="fi">🎮</div><p>Múltiples juegos diarios</p></div>
+      <div class="feat-item fade-in"><div class="fi">🏅</div><p>Sistema de múltiples ganadores</p></div>
+      <div class="feat-item fade-in"><div class="fi">🎁</div><p>Premios 100% configurables</p></div>
+      <div class="feat-item fade-in"><div class="fi">📊</div><p>Analítica en tiempo real</p></div>
+      <div class="feat-item fade-in"><div class="fi">🔔</div><p>Notificaciones automáticas</p></div>
+      <div class="feat-item fade-in"><div class="fi">🎨</div><p>Personalización de marca</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIAL -->
+<section id="diferencial">
+  <div class="container">
+    <div class="dif-inner">
+      <div class="fade-in">
+        <div class="section-label">Diferencial</div>
+        <h2>Todo funciona dentro de WhatsApp</h2>
+        <p class="section-sub" style="margin-bottom:1.5rem">No necesitas apps adicionales. Tus clientes juegan desde donde ya están. Zero fricción. Máximo engagement.</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.75rem">
+          <li style="display:flex;align-items:center;gap:.75rem;font-size:.9rem"><span style="color:var(--green);font-weight:700;font-size:1.1rem">✓</span> 2.000M+ usuarios ya usan WhatsApp</li>
+          <li style="display:flex;align-items:center;gap:.75rem;font-size:.9rem"><span style="color:var(--green);font-weight:700;font-size:1.1rem">✓</span> Tasa de apertura del 98%</li>
+          <li style="display:flex;align-items:center;gap:.75rem;font-size:.9rem"><span style="color:var(--green);font-weight:700;font-size:1.1rem">✓</span> Sin descargas, sin contraseñas</li>
+          <li style="display:flex;align-items:center;gap:.75rem;font-size:.9rem"><span style="color:var(--green);font-weight:700;font-size:1.1rem">✓</span> Experiencia familiar y confiable</li>
+        </ul>
+      </div>
+      <div class="fade-in" style="display:flex;justify-content:center">
+        <div class="wa-mockup">
+          <div class="wa-bar">
+            <div class="wa-avatar">M</div>
+            <div><div class="wa-name">MiInfo Juego</div><div class="wa-status">🟢 en línea</div></div>
+          </div>
+          <div class="wa-msg">🎮 ¡Hola! Es hora de tu trivia diaria. Participa ahora y suma puntos para el ranking.</div>
+          <div class="wa-quiz">
+            <p>❓ ¿Cuál es el beneficio de nuestro plan Premium?</p>
+            <div class="wa-opt">A) Descuento del 20%</div>
+            <div class="wa-opt">B) Envío gratis</div>
+            <div class="wa-opt">C) Acceso anticipado</div>
+          </div>
+          <div class="wa-msg green" style="margin-top:.6rem">🏆 ¡Correcto! +50 puntos. Estás en el puesto #3 del ranking.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-label">Preguntas frecuentes</div>
+      <h2>Resolvemos tus dudas</h2>
+    </div>
+    <div class="faq-list fade-in">
+      <div class="faq-item">
+        <div class="faq-q">¿Necesito conocimientos técnicos para usar MiInfo?</div>
+        <div class="faq-a">No. Nosotros nos encargamos de todo el diseño, configuración y lanzamiento de tu programa de fidelización. Tu equipo solo gestiona los premios y ve los resultados.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">¿Funciona para negocios pequeños o medianos?</div>
+        <div class="faq-a">Absolutamente. Tenemos planes adaptados a todo tipo y tamaño de negocio. La gamificación funciona igual de bien para una tienda local que para una cadena nacional.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">¿Mis clientes necesitan descargar algo?</div>
+        <div class="faq-a">No. Todo ocurre directamente en WhatsApp, la app que tus clientes ya tienen instalada. Eso es lo que nos hace únicos.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">¿Cómo se definen los premios?</div>
+        <div class="faq-a">Tú defines qué premios ofrecer: descuentos, productos, experiencias, o lo que mejor encaje con tu marca. El sistema es 100% configurable.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">¿Cuánto tiempo tarda en implementarse?</div>
+        <div class="faq-a">Desde la firma del contrato hasta el primer juego activo, normalmente entre 7 y 14 días hábiles, dependiendo de la complejidad de tu estrategia.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="cta-final">
+  <div class="container">
+    <div class="fade-in">
+      <h2>Convierte clientes en<br>jugadores fieles a tu marca</h2>
+      <p style="color:rgba(255,255,255,0.55);margin-bottom:2.5rem;font-size:1.05rem">Agenda una demo gratuita y te mostramos cómo funciona para tu negocio específico.</p>
+      <div class="cta-row">
+        <a class="btn-primary" href="https://wa.me/573000000000?text=Quiero+solicitar+una+demo+de+MiInfo" target="_blank" style="font-size:1.05rem;padding:1rem 2.25rem">👉 Solicitar demo ahora</a>
+        <a class="btn-secondary" href="https://wa.me/573000000000?text=Hola%2C+quiero+info+sobre+MiInfo" target="_blank" style="color:#fff;border-color:rgba(255,255,255,0.25);font-size:1.05rem;padding:1rem 2.25rem">💬 Contactar por WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <span>MiInfo</span>. Todos los derechos reservados. · Fidelización inteligente por WhatsApp.</p>
+</footer>
+
+<!-- FLOATING WA -->
+<a class="wa-float" href="https://wa.me/573000000000?text=Hola%2C+quiero+info+sobre+MiInfo" target="_blank" title="Hablar por WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+// Network animation canvas
+(function(){
+  const c=document.getElementById('net'),ctx=c.getContext('2d');
+  let W,H,pts=[];
+  function resize(){
+    W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;
+    pts=[];
+    for(let i=0;i<60;i++) pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*2+1.5});
+  }
+  window.addEventListener('resize',resize);
+  resize();
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(let i=0;i<pts.length;i++){
+      const p=pts[i];
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0||p.x>W) p.vx*=-1;
+      if(p.y<0||p.y>H) p.vy*=-1;
+      for(let j=i+1;j<pts.length;j++){
+        const q=pts[j],dx=p.x-q.x,dy=p.y-q.y,d=Math.sqrt(dx*dx+dy*dy);
+        if(d<120){
+          ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);
+          ctx.strokeStyle=`rgba(37,211,102,${.45*(1-d/120)})`;
+          ctx.lineWidth=.6;ctx.stroke();
+        }
+      }
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,2*Math.PI);
+      ctx.fillStyle='rgba(37,211,102,0.6)';ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// Fade-in on scroll
+(function(){
+  const els=document.querySelectorAll('.fade-in');
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}
+    });
+  },{threshold:.12});
+  els.forEach(el=>io.observe(el));
+  setTimeout(()=>{
+    const h=document.querySelector('#hero .fade-in');
+    if(h) h.classList.add('visible');
+  },100);
+})();
+
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const item=q.parentElement;
+    document.querySelectorAll('.faq-item.open').forEach(o=>{if(o!==item) o.classList.remove('open')});
+    item.classList.toggle('open');
+  });
+});
+</script>
+</body>
+</html>
