@@ -12,7 +12,7 @@
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
   :root{
-    --green:#25D366;--green-dark:#128C7E;--green-light:#e8faf2;
+    --green:#2c45bc;--green-dark:#1e3499;--green-light:#e8eaf5;
     --blue:#1a73e8;--blue-light:#e8f0fe;
     --black:#0d0d0d;--white:#ffffff;
     --gray:#f7f7f5;--gray2:#e8e8e4;--gray-text:#6b6b6b;
@@ -24,8 +24,11 @@
 
   /* NAV */
   nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--gray2);padding:0 1.5rem;height:60px;display:flex;align-items:center;justify-content:space-between}
-  .logo{font-size:1.3rem;font-weight:700;letter-spacing:-0.5px;color:var(--black)}
+  .logo{display:flex;align-items:center;gap:.5rem;font-size:1.3rem;font-weight:700;letter-spacing:-0.5px;color:var(--black)}
   .logo span{color:var(--green)}
+  .logo-img{width:60px;height:60px;border-radius:50%;object-fit:contain}
+  .lang-toggle{background:transparent;color:var(--black);border:1px solid var(--gray2);padding:.35rem .8rem;border-radius:6px;font-size:.75rem;font-weight:600;cursor:pointer;transition:border-color .2s,color .2s;display:flex;align-items:center;gap:.4rem}
+  .lang-toggle:hover{border-color:var(--green);color:var(--green)}
   nav a.nav-cta{background:var(--green);color:#fff;border:none;padding:.45rem 1.2rem;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;text-decoration:none;transition:background .2s}
   nav a.nav-cta:hover{background:var(--green-dark)}
 
@@ -47,7 +50,7 @@
   .hero-sub{font-size:clamp(1rem,2.5vw,1.2rem);color:var(--gray-text);max-width:540px;margin:0 auto 2.5rem;line-height:1.65;text-shadow:0 1px 4px rgba(0,0,0,0.08)}
   .cta-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
   .btn-primary{background:var(--green);color:#fff;border:none;padding:.85rem 2rem;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;text-decoration:none;transition:transform .15s,background .2s,box-shadow .2s;display:inline-flex;align-items:center;gap:.5rem}
-  .btn-primary:hover{background:var(--green-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,0.3)}
+  .btn-primary:hover{background:var(--green-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(44,69,188,0.3)}
   .btn-secondary{background:transparent;color:var(--black);border:1.5px solid var(--gray2);padding:.85rem 2rem;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;text-decoration:none;transition:border-color .2s,transform .15s;display:inline-flex;align-items:center;gap:.5rem}
   .btn-secondary:hover{border-color:var(--green);color:var(--green);transform:translateY(-2px)}
 
@@ -115,11 +118,11 @@
   .wa-name{font-size:.9rem;font-weight:700;color:#fff}
   .wa-status{font-size:.72rem;color:rgba(255,255,255,0.45)}
   .wa-msg{background:rgba(255,255,255,0.08);border-radius:10px;padding:.75rem 1rem;margin-bottom:.6rem;font-size:.82rem;color:rgba(255,255,255,0.75);line-height:1.5}
-  .wa-msg.green{background:rgba(37,211,102,0.15);color:rgba(255,255,255,0.9)}
-  .wa-quiz{background:rgba(37,211,102,0.12);border:1px solid rgba(37,211,102,0.3);border-radius:10px;padding:.75rem 1rem;margin-top:.75rem}
+  .wa-msg.green{background:rgba(44,69,188,0.15);color:rgba(255,255,255,0.9)}
+  .wa-quiz{background:rgba(44,69,188,0.12);border:1px solid rgba(44,69,188,0.3);border-radius:10px;padding:.75rem 1rem;margin-top:.75rem}
   .wa-quiz p{font-size:.8rem;color:rgba(255,255,255,0.8);margin-bottom:.5rem;font-weight:600}
   .wa-opt{background:rgba(255,255,255,0.06);border-radius:6px;padding:.4rem .7rem;font-size:.75rem;color:rgba(255,255,255,0.6);margin-bottom:.35rem;cursor:pointer;transition:background .15s}
-  .wa-opt:hover{background:rgba(37,211,102,0.2);color:#fff}
+  .wa-opt:hover{background:rgba(44,69,188,0.2);color:#fff}
 
   /* FAQ */
   #faq{background:var(--gray)}
@@ -141,8 +144,8 @@
   footer span{color:var(--green)}
 
   /* FLOATING WA */
-  .wa-float{position:fixed;bottom:1.5rem;right:1.5rem;z-index:200;width:56px;height:56px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.5);cursor:pointer;transition:transform .2s,box-shadow .2s;text-decoration:none}
-  .wa-float:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(37,211,102,0.65)}
+  .wa-float{position:fixed;bottom:1.5rem;right:1.5rem;z-index:200;width:56px;height:56px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(44,69,188,0.5);cursor:pointer;transition:transform .2s,box-shadow .2s;text-decoration:none}
+  .wa-float:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(44,69,188,0.65)}
   .wa-float svg{width:28px;height:28px;fill:#fff}
 
   /* ANIMATIONS */
@@ -161,8 +164,14 @@
 
 <!-- NAV -->
 <nav>
-  <div class="logo">Mi<span>Info</span></div>
-  <a class="nav-cta" href="https://wa.me/573105317126?text=Hola%2C+quiero+más+información+de+MiInfo" target="_blank">Hablar por WhatsApp</a>
+  <div class="logo">
+    <img src="logo.png" alt="MiInfo Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.marginLeft='0';">
+
+  </div>
+  <div style="display:flex;align-items:center;gap:1rem">
+    <button class="lang-toggle" onclick="toggleLanguage()" id="langBtn">🌐 EN</button>
+    <a class="nav-cta" href="https://wa.me/573105317126?text=Hola%2C+quiero+más+información+de+MiInfo" target="_blank">Hablar por WhatsApp</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -208,7 +217,7 @@
       <h2>Todo lo que tu negocio necesita para fidelizar</h2>
     </div>
     <div class="val-grid">
-      <div class="val-card fade-in"><div class="val-icon">🔁</div><h3>Fidelización real de clientes</h3
+      <div class="val-card fade-in"><div class="val-icon">🔁</div><h3>Fidelización real de clientes</h3><p>Conectamos emocionalmente con tus clientes para crear lealtad duradera y recurrente.</p></div>
       <div class="val-card fade-in"><div class="val-icon">🎮</div><h3>Juegos personalizados</h3><p>Creamos experiencias interactivas tipo quiz, adaptadas 100% a tu negocio e industria.</p></div>
       <div class="val-card fade-in"><div class="val-icon">🔄</div><h3>Estrategias de recompra</h3><p>Diseñadas específicamente para que el cliente vuelva a elegirte una y otra vez.</p></div>
       <div class="val-card fade-in"><div class="val-icon">⚡</div><h3>Campañas inteligentes</h3><p>Automatización basada en el comportamiento real del usuario para máxima efectividad.</p></div>
@@ -442,7 +451,7 @@
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(q.x, q.y);
-          ctx.strokeStyle = `rgba(37,211,102,${0.5 * (1 - d / 140)})`;
+          ctx.strokeStyle = `rgba(44,69,188,${0.5 * (1 - d / 140)})`;
           ctx.lineWidth = 0.8;
           ctx.stroke();
         }
@@ -451,7 +460,7 @@
       // Dibujar partículas
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, 2 * Math.PI);
-      ctx.fillStyle = 'rgba(37,211,102,0.7)';
+      ctx.fillStyle = 'rgba(44,69,188,0.7)';
       ctx.fill();
     }
     
@@ -482,6 +491,320 @@
     if(h) h.classList.add('visible');
   }, 100);
 })();
+
+// Translation functionality
+const translations = {
+  es: {
+    'langBtn': '🌐 EN',
+    'nav-cta': 'Hablar por WhatsApp',
+    'hero-badge': '🎮 Gamificación + WhatsApp = Fidelización real',
+    'hero-title': 'Usuarios jugando,<br>aprendiendo y <span class="accent">ganando.</span>',
+    'hero-sub': 'Juega y aprende: la nueva forma de fidelizar clientes por WhatsApp. Sin apps extra. Sin fricción. Puro engagement.',
+    'btn-primary': '🗓️ Agenda tu cita',
+    'btn-secondary': '💬 Hablar por WhatsApp',
+    'segmento-label': 'Para quién es',
+    'segmento-title': 'Para empresarios y profesionales',
+    'segmento-sub': 'Los planes de fidelización aplican para todo tipo de negocios lícitos. Adaptamos la estrategia a tu industria.',
+    'seg-card-1': {title: 'Retail y comercio', desc: 'Incentiva la recompra y aumenta la frecuencia de visita de tus clientes.'},
+    'seg-card-2': {title: 'Restaurantes', desc: 'Convierte cada visita en una experiencia de juego que genera lealtad real.'},
+    'seg-card-3': {title: 'Salud y bienestar', desc: 'Educa a tus pacientes y clientes mientras refuerzas tu marca.'},
+    'seg-card-4': {title: 'Educación', desc: 'Gamifica el aprendizaje y mantén el engagement de tus estudiantes.'},
+    'seg-card-5': {title: 'Servicios financieros', desc: 'Educa sobre productos y fideliza con dinámicas interactivas.'},
+    'seg-card-6': {title: 'Gremios', desc: 'Fideliza a asociados y miembros con gamificación estratégica.'},
+    'seg-card-7': {title: 'Industrias', desc: 'Engancha trabajadores, empresas y toda la cadena productiva.'},
+    'seg-card-8': {title: 'Gobierno', desc: 'Campañas interactivas para ciudadanos y entidades públicas.'},
+    'valor-label': 'Propuesta de valor',
+    'valor-title': 'Todo lo que tu negocio necesita para fidelizar',
+    'val-card-1': {title: 'Fidelización real de clientes', desc: 'Conectamos emocionalmente con tus clientes para crear lealtad duradera y recurrente.'},
+    'val-card-2': {title: 'Juegos personalizados', desc: 'Creamos experiencias interactivas tipo quiz, adaptadas 100% a tu negocio e industria.'},
+    'val-card-3': {title: 'Estrategias de recompra', desc: 'Diseñadas específicamente para que el cliente vuelva a elegirte una y otra vez.'},
+    'val-card-4': {title: 'Campañas inteligentes', desc: 'Automatización basada en el comportamiento real del usuario para máxima efectividad.'},
+    'como-label': 'Proceso',
+    'como-title': 'Cómo funciona MiInfo',
+    'como-sub': 'Cuatro pasos para transformar la relación con tus clientes en una ventaja competitiva.',
+    'step-1': {title: 'Análisis de necesidades', desc: 'Entendemos cómo fidelizar mejor a tus clientes y diseñamos la estrategia ideal.'},
+    'step-2': {title: 'Diseño del juego', desc: 'Creamos dinámicas tipo quiz dentro de WhatsApp, personalizadas para tu marca.'},
+    'step-3': {title: 'Sistema de puntos', desc: 'Los usuarios acumulan puntos por respuestas correctas e interacción continua.'},
+    'step-4': {title: 'Ranking y premios', desc: 'Clasificación general y múltiples ganadores con incentivos reales y configurables.'},
+    'datos-label': 'Base de datos',
+    'datos-title': 'El poder está en los datos',
+    'datos-sub': 'Recolectamos, organizamos y segmentamos tu base de clientes para activar campañas más efectivas y personalizadas.',
+    'datos-btn': '🗓️ Agenda tu cita',
+    'stat-1': 'Tasa de recompra',
+    'stat-2': 'Retención de usuarios',
+    'stat-3': 'Recordación de marca',
+    'stat-4': 'En WhatsApp',
+    'features-label': 'Características',
+    'features-title': 'Todo lo que incluye la plataforma',
+    'feat-1': 'Interfaz simple e intuitiva',
+    'feat-2': 'Respuestas rápidas y sin lag',
+    'feat-3': 'Múltiples juegos diarios',
+    'feat-4': 'Sistema de múltiples ganadores',
+    'feat-5': 'Premios 100% configurables',
+    'feat-6': 'Analítica en tiempo real',
+    'feat-7': 'Notificaciones automáticas',
+    'feat-8': 'Personalización de marca',
+    'diferencial-label': 'Diferencial',
+    'diferencial-title': 'Todo funciona dentro de WhatsApp',
+    'diferencial-sub': 'No necesitas apps adicionales. Tus clientes juegan desde donde ya están. Zero fricción. Máximo engagement.',
+    'dif-check-1': '2.000M+ usuarios ya usan WhatsApp',
+    'dif-check-2': 'Tasa de apertura del 98%',
+    'dif-check-3': 'Sin descargas, sin contraseñas',
+    'dif-check-4': 'Experiencia familiar y confiable',
+    'faq-label': 'Preguntas frecuentes',
+    'faq-title': 'Resolvemos tus dudas',
+    'faq-q1': '¿Necesito conocimientos técnicos para usar MiInfo?',
+    'faq-a1': 'No. Nosotros nos encargamos de todo el diseño, configuración y lanzamiento de tu programa de fidelización. Tu equipo solo gestiona los premios y ve los resultados.',
+    'faq-q2': '¿Funciona para negocios pequeños o medianos?',
+    'faq-a2': 'Absolutamente. Tenemos planes adaptados a todo tipo y tamaño de negocio. La gamificación funciona igual de bien para una tienda local que para una cadena nacional.',
+    'faq-q3': '¿Mis clientes necesitan descargar algo?',
+    'faq-a3': 'No. Todo ocurre directamente en WhatsApp, la app que tus clientes ya tienen instalada. Eso es lo que nos hace únicos.',
+    'faq-q4': '¿Cómo se definen los premios?',
+    'faq-a4': 'Tú defines qué premios ofrecer: descuentos, productos, experiencias, o lo que mejor encaje con tu marca. El sistema es 100% configurable.',
+    'faq-q5': '¿Cuánto tiempo tarda en implementarse?',
+    'faq-a5': 'Desde la firma del contrato hasta el primer juego activo, normalmente entre 7 y 14 días hábiles, dependiendo de la complejidad de tu estrategia.',
+    'cta-title': 'Convierte clientes en<br>jugadores fieles a tu marca',
+    'cta-sub': 'Agenda una demo gratuita y te mostramos cómo funciona para tu negocio específico.',
+    'cta-btn1': '🗓️ Agenda tu cita',
+    'cta-btn2': '💬 Contactar por WhatsApp',
+    'wa-name': 'MiInfo Juego',
+    'wa-status': '🟢 en línea',
+    'wa-msg-1': '🎮 ¡Hola! Es hora de tu trivia diaria. Participa ahora y suma puntos para el ranking.',
+    'wa-quiz-q': '❓ ¿Cuál es el beneficio de nuestro plan Premium?',
+    'wa-opt-1': 'A) Descuento del 20%',
+    'wa-opt-2': 'B) Envío gratis',
+    'wa-opt-3': 'C) Acceso anticipado',
+    'wa-msg-2': '🏆 ¡Correcto! +50 puntos. Estás en el puesto #3 del ranking.',
+    'footer': '© 2026 <span>MiInfo</span>. Todos los derechos reservados. · Fidelización inteligente por WhatsApp.'
+  },
+  en: {
+    'langBtn': '🌐 ES',
+    'nav-cta': 'Talk on WhatsApp',
+    'hero-badge': '🎮 Gamification + WhatsApp = Real Loyalty',
+    'hero-title': 'Users playing,<br>learning and <span class="accent">winning.</span>',
+    'hero-sub': 'Play and learn: the new way to retain customers through WhatsApp. No extra apps. No friction. Pure engagement.',
+    'btn-primary': '🗓️ Schedule your meeting',
+    'btn-secondary': '💬 Talk on WhatsApp',
+    'segmento-label': 'Who it\'s for',
+    'segmento-title': 'For entrepreneurs and professionals',
+    'segmento-sub': 'Loyalty plans apply to all types of legitimate businesses. We adapt the strategy to your industry.',
+    'seg-card-1': {title: 'Retail and commerce', desc: 'Encourage repeat purchases and increase your customers\' visit frequency.'},
+    'seg-card-2': {title: 'Restaurants', desc: 'Turn every visit into a gaming experience that generates real loyalty.'},
+    'seg-card-3': {title: 'Health and wellness', desc: 'Educate your patients and customers while strengthening your brand.'},
+    'seg-card-4': {title: 'Education', desc: 'Gamify learning and maintain student engagement.'},
+    'seg-card-5': {title: 'Financial services', desc: 'Educate about products and build loyalty with interactive dynamics.'},
+    'seg-card-6': {title: 'Guilds', desc: 'Build loyalty among associates and members with strategic gamification.'},
+    'seg-card-7': {title: 'Industries', desc: 'Engage workers, companies and the entire production chain.'},
+    'seg-card-8': {title: 'Government', desc: 'Interactive campaigns for citizens and public entities.'},
+    'valor-label': 'Value proposition',
+    'valor-title': 'Everything your business needs to build loyalty',
+    'val-card-1': {title: 'Real customer loyalty', desc: 'We emotionally connect with your customers to create lasting and recurring loyalty.'},
+    'val-card-2': {title: 'Customized games', desc: 'We create interactive quiz-type experiences, 100% adapted to your business and industry.'},
+    'val-card-3': {title: 'Repurchase strategies', desc: 'Specifically designed so customers choose you again and again.'},
+    'val-card-4': {title: 'Smart campaigns', desc: 'Automation based on real user behavior for maximum effectiveness.'},
+    'como-label': 'Process',
+    'como-title': 'How MiInfo works',
+    'como-sub': 'Four steps to transform your customer relationship into a competitive advantage.',
+    'step-1': {title: 'Needs analysis', desc: 'We understand how to better retain your customers and design the ideal strategy.'},
+    'step-2': {title: 'Game design', desc: 'We create quiz-type dynamics within WhatsApp, personalized for your brand.'},
+    'step-3': {title: 'Points system', desc: 'Users accumulate points for correct answers and continuous interaction.'},
+    'step-4': {title: 'Ranking and prizes', desc: 'Overall ranking and multiple winners with real and configurable incentives.'},
+    'datos-label': 'Database',
+    'datos-title': 'The power is in the data',
+    'datos-sub': 'We collect, organize and segment your customer base to activate more effective and personalized campaigns.',
+    'datos-btn': '🗓️ Schedule your meeting',
+    'stat-1': 'Repurchase rate',
+    'stat-2': 'User retention',
+    'stat-3': 'Brand recall',
+    'stat-4': 'On WhatsApp',
+    'features-label': 'Features',
+    'features-title': 'Everything included in the platform',
+    'feat-1': 'Simple and intuitive interface',
+    'feat-2': 'Fast responses without lag',
+    'feat-3': 'Multiple daily games',
+    'feat-4': 'Multiple winner system',
+    'feat-5': '100% configurable prizes',
+    'feat-6': 'Real-time analytics',
+    'feat-7': 'Automatic notifications',
+    'feat-8': 'Brand customization',
+    'diferencial-label': 'Difference',
+    'diferencial-title': 'Everything works within WhatsApp',
+    'diferencial-sub': 'No additional apps needed. Your customers play from where they already are. Zero friction. Maximum engagement.',
+    'dif-check-1': '2.000M+ users already use WhatsApp',
+    'dif-check-2': '98% open rate',
+    'dif-check-3': 'No downloads, no passwords',
+    'dif-check-4': 'Familiar and reliable experience',
+    'faq-label': 'Frequently asked questions',
+    'faq-title': 'We answer your questions',
+    'faq-q1': 'Do I need technical knowledge to use MiInfo?',
+    'faq-a1': 'No. We handle all the design, configuration and launch of your loyalty program. Your team only manages prizes and sees results.',
+    'faq-q2': 'Does it work for small or medium businesses?',
+    'faq-a2': 'Absolutely. We have plans adapted for all types and sizes of businesses. Gamification works just as well for a local store as for a national chain.',
+    'faq-q3': 'Do my customers need to download anything?',
+    'faq-a3': 'No. Everything happens directly in WhatsApp, the app your customers already have installed. That\'s what makes us unique.',
+    'faq-q4': 'How are prizes defined?',
+    'faq-a4': 'You define what prizes to offer: discounts, products, experiences, or whatever best fits your brand. The system is 100% configurable.',
+    'faq-q5': 'How long does it take to implement?',
+    'faq-a5': 'From contract signing to first active game, usually between 7 and 14 business days, depending on the complexity of your strategy.',
+    'cta-title': 'Convert customers into<br>loyal players to your brand',
+    'cta-sub': 'Schedule a free demo and we\'ll show you how it works for your specific business.',
+    'cta-btn1': '🗓️ Schedule your meeting',
+    'cta-btn2': '💬 Contact on WhatsApp',
+    'wa-name': 'MiInfo Game',
+    'wa-status': '🟢 online',
+    'wa-msg-1': '🎮 Hi! It\'s time for your daily trivia. Participate now and earn points for the ranking.',
+    'wa-quiz-q': '❓ What is the benefit of our Premium plan?',
+    'wa-opt-1': 'A) 20% discount',
+    'wa-opt-2': 'B) Free shipping',
+    'wa-opt-3': 'C) Early access',
+    'wa-msg-2': '🏆 Correct! +50 points. You\'re in #3 position of the ranking.',
+    'footer': '© 2026 <span>MiInfo</span>. All rights reserved. · Intelligent loyalty through WhatsApp.'
+  }
+};
+
+let currentLang = 'es';
+
+function toggleLanguage() {
+  currentLang = currentLang === 'es' ? 'en' : 'es';
+  updateContent();
+}
+
+function updateContent() {
+  const t = translations[currentLang];
+  
+  // Update language button
+  document.getElementById('langBtn').textContent = t['langBtn'];
+  
+  // Update navigation CTA
+  document.querySelector('.nav-cta').textContent = t['nav-cta'];
+  
+  // Update hero section
+  document.querySelector('.hero-badge').textContent = t['hero-badge'];
+  document.querySelector('#hero h1').innerHTML = t['hero-title'];
+  document.querySelector('.hero-sub').textContent = t['hero-sub'];
+  document.querySelector('#hero .btn-primary').textContent = t['btn-primary'];
+  document.querySelector('#hero .btn-secondary').textContent = t['btn-secondary'];
+  
+  // Update segmento section
+  document.querySelector('#segmento .section-label').textContent = t['segmento-label'];
+  document.querySelector('#segmento h2').textContent = t['segmento-title'];
+  document.querySelector('#segmento .section-sub').textContent = t['segmento-sub'];
+  
+  // Update segmento cards
+  const segCards = document.querySelectorAll('.seg-card');
+  for(let i = 1; i <= 8; i++) {
+    if(segCards[i-1]) {
+      segCards[i-1].querySelector('h3').textContent = t[`seg-card-${i}`].title;
+      segCards[i-1].querySelector('p').textContent = t[`seg-card-${i}`].desc;
+    }
+  }
+  
+  // Update valor section
+  document.querySelector('#valor .section-label').textContent = t['valor-label'];
+  document.querySelector('#valor h2').textContent = t['valor-title'];
+  
+  // Update valor cards
+  const valCards = document.querySelectorAll('.val-card');
+  for(let i = 1; i <= 4; i++) {
+    if(valCards[i-1]) {
+      valCards[i-1].querySelector('h3').textContent = t[`val-card-${i}`].title;
+      const descElement = valCards[i-1].querySelector('p');
+      if(descElement && t[`val-card-${i}`].desc) {
+        descElement.textContent = t[`val-card-${i}`].desc;
+      }
+    }
+  }
+  
+  // Update como section
+  document.querySelector('#como .section-label').textContent = t['como-label'];
+  document.querySelector('#como h2').textContent = t['como-title'];
+  document.querySelector('#como .section-sub').textContent = t['como-sub'];
+  
+  // Update steps
+  const steps = document.querySelectorAll('.step');
+  for(let i = 1; i <= 4; i++) {
+    if(steps[i-1]) {
+      steps[i-1].querySelector('h3').textContent = t[`step-${i}`].title;
+      steps[i-1].querySelector('p').textContent = t[`step-${i}`].desc;
+    }
+  }
+  
+  // Update datos section
+  document.querySelector('#datos .section-label').textContent = t['datos-label'];
+  document.querySelector('#datos h2').textContent = t['datos-title'];
+  document.querySelector('#datos .section-sub').textContent = t['datos-sub'];
+  document.querySelector('#datos .btn-primary').textContent = t['datos-btn'];
+  
+  // Update stats
+  const stats = document.querySelectorAll('.stat-label');
+  for(let i = 1; i <= 4; i++) {
+    if(stats[i-1]) {
+      stats[i-1].textContent = t[`stat-${i}`];
+    }
+  }
+  
+  // Update features section
+  document.querySelector('#features .section-label').textContent = t['features-label'];
+  document.querySelector('#features h2').textContent = t['features-title'];
+  
+  // Update feature items
+  const feats = document.querySelectorAll('.feat-item p');
+  for(let i = 1; i <= 8; i++) {
+    if(feats[i-1]) {
+      feats[i-1].textContent = t[`feat-${i}`];
+    }
+  }
+  
+  // Update diferencial section
+  document.querySelector('#diferencial .section-label').textContent = t['diferencial-label'];
+  document.querySelector('#diferencial h2').textContent = t['diferencial-title'];
+  document.querySelector('#diferencial .section-sub').textContent = t['diferencial-sub'];
+  
+  // Update differential checks
+  const difChecks = document.querySelectorAll('#diferencial li');
+  for(let i = 1; i <= 4; i++) {
+    if(difChecks[i-1]) {
+      const textNode = difChecks[i-1].childNodes[1];
+      if(textNode && textNode.nodeType === Node.TEXT_NODE) {
+        textNode.textContent = ` ${t[`dif-check-${i}`]}`;
+      }
+    }
+  }
+  
+  // Update FAQ section
+  document.querySelector('#faq .section-label').textContent = t['faq-label'];
+  document.querySelector('#faq h2').textContent = t['faq-title'];
+  
+  // Update FAQ items
+  const faqItems = document.querySelectorAll('.faq-item');
+  for(let i = 1; i <= 5; i++) {
+    if(faqItems[i-1]) {
+      faqItems[i-1].querySelector('.faq-q').childNodes[0].textContent = t[`faq-q${i}`];
+      faqItems[i-1].querySelector('.faq-a').textContent = t[`faq-a${i}`];
+    }
+  }
+  
+  // Update CTA final
+  document.querySelector('#cta-final h2').innerHTML = t['cta-title'];
+  document.querySelector('#cta-final p').textContent = t['cta-sub'];
+  document.querySelector('#cta-final .btn-primary').textContent = t['cta-btn1'];
+  document.querySelector('#cta-final .btn-secondary').textContent = t['cta-btn2'];
+  
+  // Update WhatsApp mockup
+  document.querySelector('.wa-name').textContent = t['wa-name'];
+  document.querySelector('.wa-status').textContent = t['wa-status'];
+  const waMsgs = document.querySelectorAll('.wa-msg');
+  if(waMsgs[0]) waMsgs[0].textContent = t['wa-msg-1'];
+  if(waMsgs[1]) waMsgs[1].textContent = t['wa-msg-2'];
+  document.querySelector('.wa-quiz p').textContent = t['wa-quiz-q'];
+  const waOpts = document.querySelectorAll('.wa-opt');
+  if(waOpts[0]) waOpts[0].textContent = t['wa-opt-1'];
+  if(waOpts[1]) waOpts[1].textContent = t['wa-opt-2'];
+  if(waOpts[2]) waOpts[2].textContent = t['wa-opt-3'];
+  
+  // Update footer
+  document.querySelector('footer p').innerHTML = t['footer'];
+}
 
 // FAQ accordion
 document.querySelectorAll('.faq-q').forEach(q => {
