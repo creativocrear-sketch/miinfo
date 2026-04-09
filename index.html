@@ -213,7 +213,7 @@
       <h2>Todo lo que tu negocio necesita para fidelizar</h2>
     </div>
     <div class="val-grid">
-      <div class="val-card fade-in"><div class="val-icon">🔁</div><h3>Fidelización real de clientes</h3
+      <div class="val-card fade-in"><div class="val-icon">🔁</div><h3>Fidelización real de clientes</h3><p>Conectamos emocionalmente con tus clientes para crear lealtad duradera y recurrente.</p></div>
       <div class="val-card fade-in"><div class="val-icon">🎮</div><h3>Juegos personalizados</h3><p>Creamos experiencias interactivas tipo quiz, adaptadas 100% a tu negocio e industria.</p></div>
       <div class="val-card fade-in"><div class="val-icon">🔄</div><h3>Estrategias de recompra</h3><p>Diseñadas específicamente para que el cliente vuelva a elegirte una y otra vez.</p></div>
       <div class="val-card fade-in"><div class="val-icon">⚡</div><h3>Campañas inteligentes</h3><p>Automatización basada en el comportamiento real del usuario para máxima efectividad.</p></div>
@@ -511,7 +511,7 @@ const translations = {
     'seg-card-8': {title: 'Gobierno', desc: 'Campañas interactivas para ciudadanos y entidades públicas.'},
     'valor-label': 'Propuesta de valor',
     'valor-title': 'Todo lo que tu negocio necesita para fidelizar',
-    'val-card-1': {title: 'Fidelización real de clientes', desc: ''},
+    'val-card-1': {title: 'Fidelización real de clientes', desc: 'Conectamos emocionalmente con tus clientes para crear lealtad duradera y recurrente.'},
     'val-card-2': {title: 'Juegos personalizados', desc: 'Creamos experiencias interactivas tipo quiz, adaptadas 100% a tu negocio e industria.'},
     'val-card-3': {title: 'Estrategias de recompra', desc: 'Diseñadas específicamente para que el cliente vuelva a elegirte una y otra vez.'},
     'val-card-4': {title: 'Campañas inteligentes', desc: 'Automatización basada en el comportamiento real del usuario para máxima efectividad.'},
@@ -563,6 +563,14 @@ const translations = {
     'cta-sub': 'Agenda una demo gratuita y te mostramos cómo funciona para tu negocio específico.',
     'cta-btn1': '🗓️ Agenda tu cita',
     'cta-btn2': '💬 Contactar por WhatsApp',
+    'wa-name': 'MiInfo Juego',
+    'wa-status': '🟢 en línea',
+    'wa-msg-1': '🎮 ¡Hola! Es hora de tu trivia diaria. Participa ahora y suma puntos para el ranking.',
+    'wa-quiz-q': '❓ ¿Cuál es el beneficio de nuestro plan Premium?',
+    'wa-opt-1': 'A) Descuento del 20%',
+    'wa-opt-2': 'B) Envío gratis',
+    'wa-opt-3': 'C) Acceso anticipado',
+    'wa-msg-2': '🏆 ¡Correcto! +50 puntos. Estás en el puesto #3 del ranking.',
     'footer': '© 2026 <span>MiInfo</span>. Todos los derechos reservados. · Fidelización inteligente por WhatsApp.'
   },
   en: {
@@ -586,7 +594,7 @@ const translations = {
     'seg-card-8': {title: 'Government', desc: 'Interactive campaigns for citizens and public entities.'},
     'valor-label': 'Value proposition',
     'valor-title': 'Everything your business needs to build loyalty',
-    'val-card-1': {title: 'Real customer loyalty', desc: ''},
+    'val-card-1': {title: 'Real customer loyalty', desc: 'We emotionally connect with your customers to create lasting and recurring loyalty.'},
     'val-card-2': {title: 'Customized games', desc: 'We create interactive quiz-type experiences, 100% adapted to your business and industry.'},
     'val-card-3': {title: 'Repurchase strategies', desc: 'Specifically designed so customers choose you again and again.'},
     'val-card-4': {title: 'Smart campaigns', desc: 'Automation based on real user behavior for maximum effectiveness.'},
@@ -638,6 +646,14 @@ const translations = {
     'cta-sub': 'Schedule a free demo and we\'ll show you how it works for your specific business.',
     'cta-btn1': '🗓️ Schedule your meeting',
     'cta-btn2': '💬 Contact on WhatsApp',
+    'wa-name': 'MiInfo Game',
+    'wa-status': '🟢 online',
+    'wa-msg-1': '🎮 Hi! It\'s time for your daily trivia. Participate now and earn points for the ranking.',
+    'wa-quiz-q': '❓ What is the benefit of our Premium plan?',
+    'wa-opt-1': 'A) 20% discount',
+    'wa-opt-2': 'B) Free shipping',
+    'wa-opt-3': 'C) Early access',
+    'wa-msg-2': '🏆 Correct! +50 points. You\'re in #3 position of the ranking.',
     'footer': '© 2026 <span>MiInfo</span>. All rights reserved. · Intelligent loyalty through WhatsApp.'
   }
 };
@@ -769,6 +785,18 @@ function updateContent() {
   document.querySelector('#cta-final p').textContent = t['cta-sub'];
   document.querySelector('#cta-final .btn-primary').textContent = t['cta-btn1'];
   document.querySelector('#cta-final .btn-secondary').textContent = t['cta-btn2'];
+  
+  // Update WhatsApp mockup
+  document.querySelector('.wa-name').textContent = t['wa-name'];
+  document.querySelector('.wa-status').textContent = t['wa-status'];
+  const waMsgs = document.querySelectorAll('.wa-msg');
+  if(waMsgs[0]) waMsgs[0].textContent = t['wa-msg-1'];
+  if(waMsgs[1]) waMsgs[1].textContent = t['wa-msg-2'];
+  document.querySelector('.wa-quiz p').textContent = t['wa-quiz-q'];
+  const waOpts = document.querySelectorAll('.wa-opt');
+  if(waOpts[0]) waOpts[0].textContent = t['wa-opt-1'];
+  if(waOpts[1]) waOpts[1].textContent = t['wa-opt-2'];
+  if(waOpts[2]) waOpts[2].textContent = t['wa-opt-3'];
   
   // Update footer
   document.querySelector('footer p').innerHTML = t['footer'];
