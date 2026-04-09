@@ -26,7 +26,8 @@
   nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--gray2);padding:0 1.5rem;height:60px;display:flex;align-items:center;justify-content:space-between}
   .logo{display:flex;align-items:center;gap:.5rem;font-size:1.3rem;font-weight:700;letter-spacing:-0.5px;color:var(--black)}
   .logo span{color:var(--green)}
-  .logo-img{width:60px;height:60px;border-radius:50%;object-fit:contain}
+  .logo-img{width:80px;height:80px;border-radius:50%;object-fit:contain}
+  .hero .logo{display:flex;justify-content:center;align-items:center;flex-direction:column;margin:2rem 0}
   .lang-toggle{background:transparent;color:var(--black);border:1px solid var(--gray2);padding:.35rem .8rem;border-radius:6px;font-size:.75rem;font-weight:600;cursor:pointer;transition:border-color .2s,color .2s;display:flex;align-items:center;gap:.4rem}
   .lang-toggle:hover{border-color:var(--green);color:var(--green)}
   nav a.nav-cta{background:var(--green);color:#fff;border:none;padding:.45rem 1.2rem;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;text-decoration:none;transition:background .2s}
@@ -164,6 +165,10 @@
 
 <!-- NAV -->
 <nav>
+  <div class="logo">
+    <img src="https://raw.githubusercontent.com/creativocrear-sketch/miinfo/master/logo.png" alt="MiInfo Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.marginLeft='0';">
+    <span style="color:var(--black)">Mi</span><span style="color:var(--green)">Info</span>
+  </div>
   <div style="display:flex;align-items:center;gap:1rem">
     <button class="lang-toggle" onclick="toggleLanguage()" id="langBtn">🌐 EN</button>
     <a class="nav-cta" href="https://wa.me/573105317126?text=Hola%2C+quiero+más+información+de+MiInfo" target="_blank">Hablar por WhatsApp</a>
@@ -173,9 +178,6 @@
 <!-- HERO -->
 <section id="hero">
   <canvas id="net"></canvas>
-   <div class="logo">
-    <img src="https://raw.githubusercontent.com/creativocrear-sketch/miinfo/master/logo.png" alt="MiInfo Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.marginLeft='0';">
-  </div>
   <div class="hero-inner fade-in">
     <div class="hero-badge">🎮 Gamificación + WhatsApp = Fidelización real</div>
     <h1>Usuarios jugando,<br>aprendiendo y <span class="accent">ganando.</span></h1>
