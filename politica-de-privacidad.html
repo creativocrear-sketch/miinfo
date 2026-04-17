@@ -35,8 +35,9 @@
   nav a.nav-cta:hover{background:var(--green-dark)}
 
   /* MAIN CONTENT */
-  main{padding:8rem 1.5rem 4rem;max-width:900px;margin:0 auto;position:relative;overflow:hidden}
+  main{padding:8rem 1.5rem 4rem;max-width:900px;margin:0 auto;position:relative;min-height:100vh}
   canvas#net{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+  .content-wrapper{position:relative;z-index:1}
   h1{font-size:2.5rem;font-weight:800;line-height:1.2;margin-bottom:1.5rem;color:var(--black)}
   h2{font-size:1.5rem;font-weight:700;margin-top:2rem;margin-bottom:1rem;color:var(--black)}
   p{margin-bottom:1rem;color:var(--gray-text)}
@@ -72,7 +73,8 @@
 <!-- MAIN CONTENT -->
 <main>
   <canvas id="net"></canvas>
-  <h1>Política de privacidad</h1>
+  <div class="content-wrapper">
+    <h1>Política de privacidad</h1>
   <p class="last-updated">Última actualización: 17-04-2026</p>
   
   <p>Miinfo se compromete a proteger su privacidad. Esta Política de Privacidad explica cómo recopilamos, usamos, divulgamos y protegemos su información cuando utiliza nuestros servicios. Por favor, lea esta política de privacidad cuidadosamente. Si no está de acuerdo con los términos de esta política de privacidad, no acceda a la aplicación.</p>
@@ -134,7 +136,8 @@
   <h2>7. Contáctenos</h2>
   <p>Si tiene preguntas o inquietudes sobre esta Política de Privacidad, puede contactarnos a través de contacto@crearcomunicaciones.net o WhatsApp +57 310 5317126.</p>
   
-  <a href="index.html" class="back-link">← Volver al inicio</a>
+    <a href="index.html" class="back-link">← Volver al inicio</a>
+  </div>
 </main>
 
 <!-- FOOTER -->
@@ -150,8 +153,9 @@
   let W, H, pts = [];
   
   function resize() {
-    W = c.width = document.body.offsetWidth;
-    H = c.height = document.body.offsetHeight;
+    const main = document.querySelector('main');
+    W = c.width = main.offsetWidth;
+    H = c.height = main.offsetHeight;
     
     pts = [];
     for(let i = 0; i < 80; i++) {
